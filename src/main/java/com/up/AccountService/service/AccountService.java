@@ -15,6 +15,7 @@ public class AccountService {
     private AccountRepository accountRepository;
 
     private BCryptEncoder encoder = new BCryptEncoder();
+
     @Autowired
     public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
@@ -23,6 +24,7 @@ public class AccountService {
     public List<Account> findAll() {
         return accountRepository.findAll();
     }
+
     public Account addNew(Account acc) {
         return accountRepository.save(acc);
     }
@@ -55,6 +57,7 @@ public class AccountService {
         }
 
         account.password = encoder.passwordEncoder().encode(account.getPassword());
+        if (account.isLocked == null) account.isLocked = false;
 
         return accountRepository.save(account);
 
