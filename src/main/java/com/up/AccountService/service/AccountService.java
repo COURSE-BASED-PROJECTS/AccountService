@@ -62,4 +62,14 @@ public class AccountService {
         return accountRepository.save(account);
 
     }
+
+    public String findNameByPhoneNumber(String phoneNumber) {
+
+        try {
+            return accountRepository.findByPhoneNumber(phoneNumber).getName();
+        } catch (Exception e) {
+            return "Anonymous User";
+        }
+
+    }
 }
